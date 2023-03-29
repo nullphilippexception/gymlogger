@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Gym Logger</string>
+
+    <!-- Fragment Add Workout -->
+    <string name="frag_add_workout.et_sets.hint">No. of sets</string>
+    <string name="frag_add_workout">No. of reps</string>
+    <string name="frag_add_workout.et_weight.hint">Weight used</string>
+    <string name="frag_add_workout.cb_date.text">Today</string>
+    <string name="frag_add_workout.tv_date_label.text">Date:</string>
+    <string name="frag_add_workout.et_note.hint">Additional info</string>
+    <string name="frag_add_workout.btn_enter.text">Enter</string>
+    <string name="frag_add_workout.btn_view.text">View</string>
+    <string name="frag_add_workout.tv_add.text"><u>Add Exercise</u></string>
+    <string name="frag_add_workout.event.success">Successfully inserted workout!</string>
+    <string name="frag_add_workout.event.failure">Error! Check your inputs! Have you added an exercise already?</string>
+
+    <!-- Fragment Add Exercise -->
+    <string name="frag_add_exercise.tv_title">Existing exercises</string>
+    <string name="frag_add_exercise.et_name.hint">Exercise name</string>
+    <string name="frag_add_exercise.btn_add.text">Add</string>
+    <string name="frag_add_exercise.tv_no_entries">You have not added any exercises yet. It is time to get going!</string>
+    <string name="frag_add_exercise.event.success">Successfully inserted exercise!</string>
+    <string name="frag_add_exercise.event.failure">Could not insert exercise, please check your inputs!</string>
+
+</resources>

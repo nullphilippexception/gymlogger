@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/addWorkoutFragment">
+    <fragment
+        android:id="@+id/addWorkoutFragment"
+        android:name="at.nullphilippexception.gymlogger.ui.addworkout.AddWorkoutFragment"
+        android:label="AddWorkoutFragment">
+        <action
+            android:id="@+id/action_goToExercises"
+            app:destination="@id/addExerciseFragment" />
+        <action
+            android:id="@+id/action_goToWorkoutList"
+            app:destination="@id/viewWorkoutsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addExerciseFragment"
+        android:name="at.nullphilippexception.gymlogger.ui.addexercise.AddExerciseFragment"
+        android:label="fragment_add_exercise"
+        tools:layout="@layout/fragment_add_exercise" >
+        <action
+            android:id="@+id/action_goToAddWorkout"
+            app:destination="@id/addWorkoutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/viewWorkoutsFragment"
+        android:name="at.nullphilippexception.gymlogger.ui.viewworkouts.ViewWorkoutsFragment"
+        android:label="fragment_view_workouts"
+        tools:layout="@layout/fragment_view_workouts" />
+
+</navigation>

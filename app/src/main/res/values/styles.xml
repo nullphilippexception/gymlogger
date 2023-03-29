@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PrimaryButton" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">?colorPrimary</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="PrimaryInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColor">?colorOnSecondary</item>
+        <item name="android:textColorHint">?colorOnSecondary</item>
+        <item name="endIconMode">custom</item>
+        <item name="endIconDrawable">@drawable/ic_editable</item>
+    </style>
+
+    <style name="PrimaryEditText" parent="Widget.AppCompat.EditText">
+        <item name="backgroundTint">?colorOnSecondary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="SpinnerTextView" parent="Widget.Material3.CheckedTextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?colorOnSecondary</item>
+    </style>
+
+</resources>

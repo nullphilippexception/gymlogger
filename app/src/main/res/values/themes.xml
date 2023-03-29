@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.GymLogger" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/royal_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/gold</item>
+        <item name="colorOnSecondary">@color/dark_blue</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <!-- Customize your theme here. -->
+        <item name="buttonStyle">@style/PrimaryButton</item>
+        <item name="textInputStyle">@style/PrimaryInputLayout</item>
+        <item name="editTextStyle">@style/PrimaryEditText</item>
+        <item name="android:windowBackground">@color/gray_green</item>
+
+    </style>
+</resources>
