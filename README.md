@@ -13,6 +13,7 @@ Open TODOs:
 * refactor/summarize viewmodel events & livedata
 
 Screenshots:
+
 ![grafik](https://user-images.githubusercontent.com/96916770/228667338-76f49b91-f49e-491e-8a52-d90721ec8b19.png)
 
 ![grafik](https://user-images.githubusercontent.com/96916770/228667523-bdb0a5f8-3244-40bc-916f-3ef9c482b686.png)
