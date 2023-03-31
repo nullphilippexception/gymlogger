@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import at.nullphilippexception.gymlogger.model.Exercise
 import at.nullphilippexception.gymlogger.model.Workout
+import at.nullphilippexception.gymlogger.util.RoomConverters
 
 @Database(entities = [Workout::class, Exercise::class], version = 1)
+@TypeConverters(RoomConverters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun workoutDao(): WorkoutDao
     abstract fun exerciseDao(): ExerciseDao

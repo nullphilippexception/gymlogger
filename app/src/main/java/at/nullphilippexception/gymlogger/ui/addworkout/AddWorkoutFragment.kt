@@ -37,7 +37,7 @@ class AddWorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.exercises.observe(viewLifecycleOwner) { lst ->
             binding.spExercise.adapter = ArrayAdapter(requireContext(),
-                R.layout.view_spinner_item, lst)
+                R.layout.view_spinner_item, lst.map { it.name })
         }
 
         viewModel.viewModelEvent.observe(viewLifecycleOwner) {  event ->

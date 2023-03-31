@@ -1,5 +1,6 @@
 package at.nullphilippexception.gymlogger.ui.addexercise
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,16 +24,24 @@ class WorkoutsListRecyclerAdapter internal constructor(private val context: Cont
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvExercise.text = workouts[position].exercise
+        val exercise = workouts[position].exercise
+        holder.tvExercise.text = exercise.name
         holder.tvDate.text = workouts[position].date
         holder.tvSets.text = workouts[position].sets.toString()
         holder.tvReps.text = workouts[position].reps.toString()
         holder.tvWeight.text = workouts[position].weight.toString()
         holder.tvNote.text = workouts[position].note
-        holder.ivIcon.setImageDrawable(
-            AppCompatResources
-            .getDrawable(context, ExerciseType.valueOf("CHEST").drawable)
-        )
+        try {
+            holder.ivIcon.setImageDrawable(
+                AppCompatResources
+                    .getDrawable(context, ExerciseType.valueOf(exercise.category).drawable)
+            )
+        } catch(iae: IllegalArgumentException) {
+            // this error is thrown when exercise.category is unknown
+            // should never happen, as user is not free to enter exercise category on their own
+            Log.e("UNKNOWN EXERCISE", iae.message ?: "no error message")
+        }
+
     }
 
     override fun getItemCount(): Int {

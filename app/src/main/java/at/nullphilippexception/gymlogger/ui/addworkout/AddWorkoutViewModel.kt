@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 
 class AddWorkoutViewModel(application: Application) : AndroidViewModel(application) {
-    val exercises: MutableLiveData<List<String>> by lazy {
-        MutableLiveData<List<String>>()
+    val exercises: MutableLiveData<List<Exercise>> by lazy {
+        MutableLiveData<List<Exercise>>()
     }
     val viewModelEvent: MutableLiveData<ViewModelEvent> by lazy {
         MutableLiveData<ViewModelEvent>()
@@ -27,9 +27,6 @@ class AddWorkoutViewModel(application: Application) : AndroidViewModel(applicati
                     .getDatabase(getApplication())
                     .exerciseDao()
                     .getAllExercises()
-                    .map {
-                        it.name
-                    }
             )
         }
     }
@@ -45,7 +42,7 @@ class AddWorkoutViewModel(application: Application) : AndroidViewModel(applicati
                 AppDatabase.getDatabase(getApplication()).workoutDao().insertWorkout(
                     Workout(
                         uid = UUID.randomUUID().toString(),
-                        exercise = exercise,
+                        exercise = exercises.value?.find { it.name == exercise } ?: Exercise.getEmptyExercise(),
                         sets = sets.toInt(),
                         reps = reps.toInt(),
                         weight = weight.toDouble(),
