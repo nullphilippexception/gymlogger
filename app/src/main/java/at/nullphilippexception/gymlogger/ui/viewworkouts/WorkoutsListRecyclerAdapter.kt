@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import at.nullphilippexception.gymlogger.R
 import at.nullphilippexception.gymlogger.model.Workout
@@ -17,12 +18,21 @@ class WorkoutsListRecyclerAdapter internal constructor(private val context: Cont
     private var clickListener: ItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view: View = layoutInflater.inflate(R.layout.view_exercise_item, parent, false)
+        val view: View = layoutInflater.inflate(R.layout.view_workout_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //holder.tvText.text = [position].name
+        holder.tvExercise.text = workouts[position].exercise
+        holder.tvDate.text = workouts[position].date
+        holder.tvSets.text = workouts[position].sets.toString()
+        holder.tvReps.text = workouts[position].reps.toString()
+        holder.tvWeight.text = workouts[position].weight.toString()
+        holder.tvNote.text = workouts[position].note
+        holder.ivIcon.setImageDrawable(
+            AppCompatResources
+            .getDrawable(context, ExerciseType.valueOf("CHEST").drawable)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -31,13 +41,22 @@ class WorkoutsListRecyclerAdapter internal constructor(private val context: Cont
 
     inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-        lateinit var tvText: TextView
-        lateinit var ivIcon: ImageView
+        var tvExercise: TextView
+        var tvDate: TextView
+        var tvReps: TextView
+        var tvSets: TextView
+        var tvWeight: TextView
+        var tvNote: TextView
+        var ivIcon: ImageView
 
         init {
-            tvText = itemView.findViewById(R.id.tv_text)
+            tvExercise = itemView.findViewById(R.id.tv_exercise)
+            tvDate = itemView.findViewById(R.id.tv_date)
+            tvReps = itemView.findViewById(R.id.tv_reps)
+            tvSets = itemView.findViewById(R.id.tv_sets)
+            tvWeight = itemView.findViewById(R.id.tv_weight)
+            tvNote = itemView.findViewById(R.id.tv_note)
             ivIcon = itemView.findViewById(R.id.iv_icon)
-            itemView.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
