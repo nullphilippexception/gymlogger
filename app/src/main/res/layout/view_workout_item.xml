@@ -10,6 +10,7 @@
         android:layout_height="30dp"
         app:tint="?colorSecondary"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
@@ -18,6 +19,7 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="?colorOnPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_icon"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -27,6 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textColor="?colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/tv_exercise"
         app:layout_constraintStart_toEndOf="@id/iv_icon"
         app:layout_constraintEnd_toStartOf="@id/tv_sets"/>
@@ -36,6 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textColor="?colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/tv_exercise"
         app:layout_constraintStart_toEndOf="@id/tv_date"
         app:layout_constraintEnd_toStartOf="@id/tv_reps"/>
@@ -45,6 +49,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textColor="?colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/tv_exercise"
         app:layout_constraintStart_toEndOf="@id/tv_sets"
         app:layout_constraintEnd_toStartOf="@id/tv_weight"/>
@@ -54,16 +59,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textColor="?colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/tv_exercise"
         app:layout_constraintStart_toEndOf="@id/tv_reps"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/tv_note"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_date" />
+        android:textColor="?colorOnPrimary"
+        app:layout_constraintTop_toBottomOf="@id/tv_date"
+        app:layout_constraintStart_toEndOf="@id/iv_icon"
+        android:visibility="gone"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

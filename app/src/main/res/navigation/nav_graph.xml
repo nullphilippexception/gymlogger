@@ -30,6 +30,15 @@
         android:id="@+id/viewWorkoutsFragment"
         android:name="at.nullphilippexception.gymlogger.ui.viewworkouts.ViewWorkoutsFragment"
         android:label="fragment_view_workouts"
-        tools:layout="@layout/fragment_view_workouts" />
+        tools:layout="@layout/fragment_view_workouts">
+        <action
+            android:id="@+id/action_goToEditWorkout"
+            app:destination="@id/editWorkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editWorkoutFragment"
+        android:name="at.nullphilippexception.gymlogger.ui.viewworkouts.editworkout.EditWorkoutFragment"
+        android:label="fragment_edit_workout"
+        tools:layout="@layout/fragment_edit_workout" />
 
 </navigation>

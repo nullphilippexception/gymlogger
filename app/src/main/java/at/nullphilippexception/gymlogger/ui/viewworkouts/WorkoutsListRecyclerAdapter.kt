@@ -3,13 +3,17 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import at.nullphilippexception.gymlogger.R
 import at.nullphilippexception.gymlogger.model.Workout
+import at.nullphilippexception.gymlogger.model.Workout.Companion.EMPTY_STRING
 
 
 class WorkoutsListRecyclerAdapter internal constructor(private val context: Context,
@@ -30,7 +34,15 @@ class WorkoutsListRecyclerAdapter internal constructor(private val context: Cont
         holder.tvSets.text = workouts[position].sets.toString()
         holder.tvReps.text = workouts[position].reps.toString()
         holder.tvWeight.text = workouts[position].weight.toString()
-        holder.tvNote.text = workouts[position].note
+        val note = workouts[position].note
+
+        if(note != EMPTY_STRING) {
+            holder.tvNote.visibility = VISIBLE
+            holder.tvNote.text = workouts[position].note
+        } else {
+            holder.tvNote.visibility = GONE
+        }
+
         try {
             holder.ivIcon.setImageDrawable(
                 AppCompatResources
@@ -66,6 +78,7 @@ class WorkoutsListRecyclerAdapter internal constructor(private val context: Cont
             tvWeight = itemView.findViewById(R.id.tv_weight)
             tvNote = itemView.findViewById(R.id.tv_note)
             ivIcon = itemView.findViewById(R.id.iv_icon)
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {

@@ -3,7 +3,7 @@
 
     <!-- Fragment Add Workout -->
     <string name="frag_add_workout.et_sets.hint">No. of sets</string>
-    <string name="frag_add_workout">No. of reps</string>
+    <string name="frag_add_workout.et_reps.hint">No. of reps</string>
     <string name="frag_add_workout.et_weight.hint">Weight used</string>
     <string name="frag_add_workout.cb_date.text">Today</string>
     <string name="frag_add_workout.tv_date_label.text">Date:</string>
@@ -21,5 +21,13 @@
     <string name="frag_add_exercise.tv_no_entries">You have not added any exercises yet. It is time to get going!</string>
     <string name="frag_add_exercise.event.success">Successfully inserted exercise!</string>
     <string name="frag_add_exercise.event.failure">Could not insert exercise, please check your inputs!</string>
+
+    <!-- Fragment Edit Workout -->
+    <string name="frag_edit_workout.event.error_loading">There was an error loading the workout, please try again.</string>
+    <string name="frag_edit_workout.btn_delete.text">Delete</string>
+    <string name="frag_edit_workout.btn_save.text">Save</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

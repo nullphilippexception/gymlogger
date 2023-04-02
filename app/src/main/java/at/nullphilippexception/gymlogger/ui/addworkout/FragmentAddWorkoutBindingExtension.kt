@@ -1,9 +1,11 @@
 package at.nullphilippexception.gymlogger.model
 import at.nullphilippexception.gymlogger.databinding.FragmentAddWorkoutBinding
 import at.nullphilippexception.gymlogger.model.Workout.Companion.EMPTY_STRING
+import at.nullphilippexception.gymlogger.util.getTodaysDateFormatted
+import java.util.*
 
 fun FragmentAddWorkoutBinding.bind(
-    onEnterWorkout: (String, String, String, String, String, String) -> Unit,
+    onEnterWorkout: (String, String, String, String, String) -> Unit,
     onViewWorkouts: () -> Unit,
     onAddExercise: () -> Unit,
     onChangeDate: () -> Unit
@@ -13,7 +15,6 @@ fun FragmentAddWorkoutBinding.bind(
         etSets.nullSafeString(),
         etReps.nullSafeString(),
         etWeight.nullSafeString(),
-        cbDate.nullSafeString(),
         etNote.nullSafeString()
     ) }
     btnView.setOnClickListener { onViewWorkouts() }

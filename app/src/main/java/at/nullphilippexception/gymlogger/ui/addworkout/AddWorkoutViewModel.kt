@@ -8,13 +8,17 @@ import at.nullphilippexception.gymlogger.model.Workout
 import at.nullphilippexception.gymlogger.model.Workout.Companion.EMPTY_STRING
 import at.nullphilippexception.gymlogger.model.database.AppDatabase
 import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent.*
+import at.nullphilippexception.gymlogger.util.getTodaysDateFormatted
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.UUID
+import java.util.*
 
 class AddWorkoutViewModel(application: Application) : AndroidViewModel(application) {
     val exercises: MutableLiveData<List<Exercise>> by lazy {
         MutableLiveData<List<Exercise>>()
+    }
+    val date: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
     val viewModelEvent: MutableLiveData<ViewModelEvent> by lazy {
         MutableLiveData<ViewModelEvent>()
@@ -28,11 +32,13 @@ class AddWorkoutViewModel(application: Application) : AndroidViewModel(applicati
                     .exerciseDao()
                     .getAllExercises()
             )
+            date.postValue(
+                Calendar.getInstance().getTodaysDateFormatted()
+            )
         }
     }
 
-    fun addWorkout(exercise: String, sets: String, reps: String, weight: String,
-                   date: String, note: String) {
+    fun addWorkout(exercise: String, sets: String, reps: String, weight: String, note: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 if(exercise.isEmpty()) throw IllegalArgumentException("Exercise field can't be empty")
@@ -46,7 +52,7 @@ class AddWorkoutViewModel(application: Application) : AndroidViewModel(applicati
                         sets = sets.toInt(),
                         reps = reps.toInt(),
                         weight = weight.toDouble(),
-                        date = date,
+                        date = date.value ?: EMPTY_STRING,
                         note = note
                     )
                 )

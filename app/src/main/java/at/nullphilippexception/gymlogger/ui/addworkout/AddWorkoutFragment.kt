@@ -15,6 +15,9 @@ import at.nullphilippexception.gymlogger.model.bind
 import at.nullphilippexception.gymlogger.model.resetText
 import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent.INSERT_FAILURE
 import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent.INSERT_SUCCESS
+import at.nullphilippexception.gymlogger.util.WorkoutDatePickerDialog
+import at.nullphilippexception.gymlogger.util.getTodaysDateFormatted
+import java.util.*
 
 class AddWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentAddWorkoutBinding
@@ -40,6 +43,10 @@ class AddWorkoutFragment : Fragment() {
                 R.layout.view_spinner_item, lst.map { it.name })
         }
 
+        viewModel.date.observe(viewLifecycleOwner) {
+            binding.cbDate.text = it
+        }
+
         viewModel.viewModelEvent.observe(viewLifecycleOwner) {  event ->
             when(event) {
                 INSERT_SUCCESS -> {
@@ -61,7 +68,22 @@ class AddWorkoutFragment : Fragment() {
     }
 
     private fun handleDateCheckbox() {
-        // pop up date picker and edit checkbox text accordingly
+        // this is after click! so if not checked anymore, it was previously checked
+        if(!binding.cbDate.isChecked) {
+            val datePicker = WorkoutDatePickerDialog()
+            datePicker.setListener(object : WorkoutDatePickerDialog.DateDialogListener {
+                override fun onDateSet(year: Int, month: Int, dayOfMonth: Int) {
+                    viewModel.date.postValue(
+                        "$dayOfMonth.$month.$year"
+                    )
+                }
+            })
+            datePicker.show(parentFragmentManager, "STRING") // fix this & yyyy date
+        } else {
+            viewModel.date.postValue(
+                Calendar.getInstance().getTodaysDateFormatted()
+            )
+        }
     }
 
     private fun resetInputs() {
@@ -69,5 +91,7 @@ class AddWorkoutFragment : Fragment() {
         binding.etReps.resetText()
         binding.etSets.resetText()
         binding.etNote.resetText()
+        binding.cbDate.text = Calendar.getInstance().getTodaysDateFormatted()
+        binding.cbDate.isChecked = true
     }
 }
