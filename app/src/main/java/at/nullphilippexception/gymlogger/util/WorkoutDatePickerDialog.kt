@@ -25,7 +25,8 @@ class WorkoutDatePickerDialog : DialogFragment(), DatePickerDialog.OnDateSetList
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        listener.onDateSet(year, month, dayOfMonth)
+        // JAN should be 1, not 0
+        listener.onDateSet(year, month+1, dayOfMonth)
     }
 
     fun setListener(listener: DateDialogListener) {

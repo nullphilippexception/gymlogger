@@ -11,14 +11,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import at.nullphilippexception.gymlogger.R
 import at.nullphilippexception.gymlogger.databinding.FragmentAddWorkoutBinding
-import at.nullphilippexception.gymlogger.model.bind
 import at.nullphilippexception.gymlogger.model.resetText
 import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent.INSERT_FAILURE
 import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent.INSERT_SUCCESS
 import at.nullphilippexception.gymlogger.util.WorkoutDatePickerDialog
-import at.nullphilippexception.gymlogger.util.getTodaysDateFormatted
+import at.nullphilippexception.gymlogger.util.convertToCorrectFormat
+import at.nullphilippexception.gymlogger.util.getDateFormatted
 import java.util.*
 
+// TODO enable to access this screen via TopMenu
+// TODO datepicker topbar color
 class AddWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentAddWorkoutBinding
     private val viewModel: AddWorkoutViewModel by viewModels()
@@ -31,16 +33,18 @@ class AddWorkoutFragment : Fragment() {
             viewModel::addWorkout,
             this@AddWorkoutFragment::viewWorkouts,
             this@AddWorkoutFragment::addExercise,
-            this@AddWorkoutFragment::handleDateCheckbox
+            this@AddWorkoutFragment::handleDateCheckbox,
+            this@AddWorkoutFragment.requireContext()
         )
         return binding.root
     }
 
+    // TODO add proper string
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.exercises.observe(viewLifecycleOwner) { lst ->
             binding.spExercise.adapter = ArrayAdapter(requireContext(),
-                R.layout.view_spinner_item, lst.map { it.name })
+                R.layout.view_spinner_item, lst.map { it.name }.ifEmpty { listOf("Please add exercises") })
         }
 
         viewModel.date.observe(viewLifecycleOwner) {
@@ -48,6 +52,7 @@ class AddWorkoutFragment : Fragment() {
         }
 
         viewModel.viewModelEvent.observe(viewLifecycleOwner) {  event ->
+            // TODO dont do this onResume!
             when(event) {
                 INSERT_SUCCESS -> {
                     Toast.makeText(requireContext(), getString(R.string.frag_add_workout_event_success), Toast.LENGTH_SHORT).show()
@@ -74,14 +79,14 @@ class AddWorkoutFragment : Fragment() {
             datePicker.setListener(object : WorkoutDatePickerDialog.DateDialogListener {
                 override fun onDateSet(year: Int, month: Int, dayOfMonth: Int) {
                     viewModel.date.postValue(
-                        "$dayOfMonth.$month.$year"
+                        Calendar.getInstance().convertToCorrectFormat(dayOfMonth, month, year)
                     )
                 }
             })
             datePicker.show(parentFragmentManager, "STRING") // fix this & yyyy date
         } else {
             viewModel.date.postValue(
-                Calendar.getInstance().getTodaysDateFormatted()
+                Calendar.getInstance().getDateFormatted()
             )
         }
     }
@@ -91,7 +96,7 @@ class AddWorkoutFragment : Fragment() {
         binding.etReps.resetText()
         binding.etSets.resetText()
         binding.etNote.resetText()
-        binding.cbDate.text = Calendar.getInstance().getTodaysDateFormatted()
+        binding.cbDate.text = Calendar.getInstance().getDateFormatted()
         binding.cbDate.isChecked = true
     }
 }

@@ -21,6 +21,7 @@ import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+// TODO add divider for recycleview
 class AddExerciseFragment : Fragment() {
     private lateinit var binding: FragmentAddExerciseBinding
     private val viewModel: AddExerciseViewModel by viewModels()
@@ -52,7 +53,9 @@ class AddExerciseFragment : Fragment() {
                 }
                 INSERT_FAILURE ->
                     Toast.makeText(requireContext(), getString(R.string.frag_add_exercise_event_failure), Toast.LENGTH_SHORT).show()
-
+                else -> {
+                    // do nothing
+                }
             }
         }
 

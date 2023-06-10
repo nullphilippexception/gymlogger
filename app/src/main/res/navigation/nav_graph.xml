@@ -39,6 +39,6 @@
         android:id="@+id/editWorkoutFragment"
         android:name="at.nullphilippexception.gymlogger.ui.viewworkouts.editworkout.EditWorkoutFragment"
         android:label="fragment_edit_workout"
-        tools:layout="@layout/fragment_edit_workout" />
+        tools:layout="@layout/fragment_edit_workout"/>
 
 </navigation>

@@ -14,6 +14,8 @@
         <item name="textInputStyle">@style/PrimaryInputLayout</item>
         <item name="editTextStyle">@style/PrimaryEditText</item>
         <item name="android:windowBackground">@color/gray_green</item>
+        <item name="dividerVertical">@drawable/horizontal_line</item>
+
 
     </style>
 </resources>

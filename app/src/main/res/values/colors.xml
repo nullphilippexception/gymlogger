@@ -12,4 +12,6 @@
     <color name="gray_green">#cdcdbc</color>
     <color name="dark_blue">#1e2da0</color>
     <color name="gold">#ffd700</color>
+
+    <color name="medium_grey">#555555</color>
 </resources>

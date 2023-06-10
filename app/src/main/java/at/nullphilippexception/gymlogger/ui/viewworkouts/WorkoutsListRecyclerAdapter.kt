@@ -31,9 +31,9 @@ class WorkoutsListRecyclerAdapter internal constructor(private val context: Cont
         val exercise = workouts[position].exercise
         holder.tvExercise.text = exercise.name
         holder.tvDate.text = workouts[position].date
-        holder.tvSets.text = workouts[position].sets.toString()
-        holder.tvReps.text = workouts[position].reps.toString()
-        holder.tvWeight.text = workouts[position].weight.toString()
+        holder.tvSets.text = workouts[position].getSetsString(context)
+        holder.tvReps.text = workouts[position].getRepsString(context)
+        holder.tvWeight.text = workouts[position].getWeightString(context)
         val note = workouts[position].note
 
         if(note != EMPTY_STRING) {

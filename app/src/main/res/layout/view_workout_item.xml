@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
@@ -17,6 +18,7 @@
         android:id="@+id/tv_exercise"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="?colorOnPrimary"
@@ -26,8 +28,9 @@
 
     <TextView
         android:id="@+id/tv_date"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:textSize="20sp"
         android:textColor="?colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/tv_exercise"
@@ -38,6 +41,7 @@
         android:id="@+id/tv_sets"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:textSize="20sp"
         android:textColor="?colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/tv_exercise"
@@ -68,6 +72,7 @@
         android:id="@+id/tv_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:textSize="20sp"
         android:textColor="?colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/tv_date"

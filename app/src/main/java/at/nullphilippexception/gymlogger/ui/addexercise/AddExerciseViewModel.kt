@@ -73,9 +73,11 @@ data class ViewData (
     var showNoExercisesHint: Boolean = false
 )
 
+// TODO move this to dedicated file!
 enum class ViewModelEvent {
     INSERT_SUCCESS,
-    INSERT_FAILURE
+    INSERT_FAILURE,
+    DELETE_SUCCESS
 }
 
 enum class ExerciseType(val drawable: Int = R.drawable.ic_error) {

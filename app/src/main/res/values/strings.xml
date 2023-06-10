@@ -30,4 +30,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Workout Class -->
+    <string name="class_workout_sets">S:</string>
+    <string name="class_workout_reps">R:</string>
+    <string name="class_workout_weight">W:</string>
+
 </resources>

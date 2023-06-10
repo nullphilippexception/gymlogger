@@ -8,7 +8,7 @@ import at.nullphilippexception.gymlogger.model.Workout
 import at.nullphilippexception.gymlogger.model.Workout.Companion.EMPTY_STRING
 import at.nullphilippexception.gymlogger.model.database.AppDatabase
 import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent.*
-import at.nullphilippexception.gymlogger.util.getTodaysDateFormatted
+import at.nullphilippexception.gymlogger.util.getDateFormatted
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
@@ -33,7 +33,7 @@ class AddWorkoutViewModel(application: Application) : AndroidViewModel(applicati
                     .getAllExercises()
             )
             date.postValue(
-                Calendar.getInstance().getTodaysDateFormatted()
+                Calendar.getInstance().getDateFormatted()
             )
         }
     }
