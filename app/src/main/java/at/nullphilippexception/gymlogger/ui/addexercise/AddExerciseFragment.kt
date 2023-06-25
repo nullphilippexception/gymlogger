@@ -1,5 +1,6 @@
 package at.nullphilippexception.gymlogger.ui.addexercise
 
+import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,13 +16,16 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import at.nullphilippexception.gymlogger.R
 import at.nullphilippexception.gymlogger.databinding.FragmentAddExerciseBinding
+import at.nullphilippexception.gymlogger.model.database.AppDatabase
 import at.nullphilippexception.gymlogger.model.nullSafeString
 import at.nullphilippexception.gymlogger.ui.addexercise.ViewModelEvent.*
 import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-// TODO add divider for recycleview
+// TODO add divider for
+@AndroidEntryPoint
 class AddExerciseFragment : Fragment() {
     private lateinit var binding: FragmentAddExerciseBinding
     private val viewModel: AddExerciseViewModel by viewModels()

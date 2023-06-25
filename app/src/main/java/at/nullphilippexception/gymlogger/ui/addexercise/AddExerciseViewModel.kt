@@ -4,19 +4,25 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.nullphilippexception.gymlogger.R
 import at.nullphilippexception.gymlogger.model.database.AppDatabase
 import at.nullphilippexception.gymlogger.model.Exercise
+import at.nullphilippexception.gymlogger.model.database.ExerciseDao
 import at.nullphilippexception.gymlogger.ui.addexercise.ViewModelEvent.*
+import at.nullphilippexception.gymlogger.util.CoroutineDispatchers
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddExerciseViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class AddExerciseViewModel @Inject constructor(
+    private val dao: ExerciseDao,
+    private val dispatcher: CoroutineDispatchers
+) : ViewModel() {
+
     val viewData: MutableLiveData<ViewData> by lazy {
         MutableLiveData<ViewData>()
     }
@@ -25,7 +31,7 @@ class AddExerciseViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher.io) {
             val currentExercises = getExercises()
             viewData.postValue(
                 ViewData(
@@ -37,13 +43,11 @@ class AddExerciseViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun insertExercise(name: String, category: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher.io) {
             try {
                 if(name.isEmpty()) throw IllegalArgumentException("Name can't be empty")
 
-                AppDatabase
-                    .getDatabase(getApplication())
-                    .exerciseDao()
+                dao
                     .insertExercise(Exercise(
                         name = name,
                         category = category
@@ -52,7 +56,7 @@ class AddExerciseViewModel(application: Application) : AndroidViewModel(applicat
                     INSERT_SUCCESS
                 )
             } catch(e: Exception) {
-                Log.e("ADD EXERCISE", e.message?:"no error message")
+                //Log.e("ADD EXERCISE", e.message?:"no error message")
                 viewModelEvent.postValue(
                     INSERT_FAILURE
                 )
@@ -61,9 +65,7 @@ class AddExerciseViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private fun getExercises(): List<Exercise> {
-        return AppDatabase
-            .getDatabase(getApplication())
-            .exerciseDao()
+        return dao
             .getAllExercises()
     }
 }
