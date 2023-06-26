@@ -7,13 +7,23 @@ import at.nullphilippexception.gymlogger.model.Exercise
 import at.nullphilippexception.gymlogger.model.Workout
 import at.nullphilippexception.gymlogger.model.Workout.Companion.EMPTY_STRING
 import at.nullphilippexception.gymlogger.model.database.AppDatabase
+import at.nullphilippexception.gymlogger.model.database.ExerciseDao
+import at.nullphilippexception.gymlogger.model.database.WorkoutDao
 import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent.*
+import at.nullphilippexception.gymlogger.util.CoroutineDispatchers
 import at.nullphilippexception.gymlogger.util.getDateFormatted
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class AddWorkoutViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class AddWorkoutViewModel @Inject constructor(
+    private val exerciseDao: ExerciseDao,
+    private val workoutDao: WorkoutDao,
+    private val dispatchers: CoroutineDispatchers
+) : ViewModel() {
     val exercises: MutableLiveData<List<Exercise>> by lazy {
         MutableLiveData<List<Exercise>>()
     }
@@ -25,11 +35,9 @@ class AddWorkoutViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatchers.io) {
             exercises.postValue(
-                AppDatabase
-                    .getDatabase(getApplication())
-                    .exerciseDao()
+                exerciseDao
                     .getAllExercises()
             )
             date.postValue(
@@ -39,13 +47,13 @@ class AddWorkoutViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun addWorkout(exercise: String, sets: String, reps: String, weight: String, note: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatchers.io) {
             try {
                 if(exercise.isEmpty()) throw IllegalArgumentException("Exercise field can't be empty")
                 if(sets.toIntOrNull() == null) throw IllegalArgumentException("Sets must be an Integer")
                 if(reps.toIntOrNull() == null) throw IllegalArgumentException("Reps must be an Integer")
                 if(weight.toDoubleOrNull() == null) throw IllegalArgumentException("Weight must be a Double")
-                AppDatabase.getDatabase(getApplication()).workoutDao().insertWorkout(
+                workoutDao.insertWorkout(
                     Workout(
                         uid = UUID.randomUUID().toString(),
                         exercise = exercises.value?.find { it.name == exercise } ?: Exercise.getEmptyExercise(),

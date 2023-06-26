@@ -18,9 +18,11 @@ import at.nullphilippexception.gymlogger.ui.viewworkouts.editworkout.WORKOUT_ID
 import at.nullphilippexception.gymlogger.util.WorkoutDatePickerDialog
 import at.nullphilippexception.gymlogger.util.convertToCorrectFormat
 import at.nullphilippexception.gymlogger.util.getDateFormatted
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 // TODO images for image buttons
+@AndroidEntryPoint
 class ViewWorkoutsFragment : Fragment(), WorkoutsListRecyclerAdapter.ItemClickListener {
     private lateinit var binding: FragmentViewWorkoutsBinding
     private val viewModel: ViewWorkoutsViewModel by viewModels()

@@ -17,10 +17,12 @@ import at.nullphilippexception.gymlogger.ui.addworkout.ViewModelEvent.INSERT_SUC
 import at.nullphilippexception.gymlogger.util.WorkoutDatePickerDialog
 import at.nullphilippexception.gymlogger.util.convertToCorrectFormat
 import at.nullphilippexception.gymlogger.util.getDateFormatted
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 // TODO enable to access this screen via TopMenu
 // TODO datepicker topbar color
+@AndroidEntryPoint
 class AddWorkoutFragment : Fragment() {
     private lateinit var binding: FragmentAddWorkoutBinding
     private val viewModel: AddWorkoutViewModel by viewModels()

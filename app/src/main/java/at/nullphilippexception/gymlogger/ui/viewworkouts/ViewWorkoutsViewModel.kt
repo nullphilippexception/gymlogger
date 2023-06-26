@@ -3,17 +3,25 @@ package at.nullphilippexception.gymlogger.ui.viewworkouts
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.nullphilippexception.gymlogger.model.Workout
 import at.nullphilippexception.gymlogger.model.database.AppDatabase
+import at.nullphilippexception.gymlogger.model.database.WorkoutDao
+import at.nullphilippexception.gymlogger.util.CoroutineDispatchers
 import at.nullphilippexception.gymlogger.util.getDateFormatted
 import at.nullphilippexception.gymlogger.util.getFormattedNextDay
 import at.nullphilippexception.gymlogger.util.getFormattedPreviousDay
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ViewWorkoutsViewModel(application: Application): AndroidViewModel(application) {
+@HiltViewModel
+class ViewWorkoutsViewModel(
+    private val workoutDao: WorkoutDao,
+    private val dispatchers: CoroutineDispatchers
+): ViewModel() {
     val selectedDate: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
@@ -22,7 +30,7 @@ class ViewWorkoutsViewModel(application: Application): AndroidViewModel(applicat
     }
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatchers.io) {
             loadWorkoutsFromDb()
             selectedDate.postValue(
                 Calendar.getInstance().getDateFormatted()
@@ -31,7 +39,7 @@ class ViewWorkoutsViewModel(application: Application): AndroidViewModel(applicat
     }
 
     fun refresh() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatchers.io) {
             selectedDate.postValue(
                 Calendar.getInstance().getDateFormatted()
             )
@@ -40,7 +48,7 @@ class ViewWorkoutsViewModel(application: Application): AndroidViewModel(applicat
     }
 
     fun previousDay() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatchers.io) {
             val tmpDate = Calendar
                 .getInstance()
                 .getFormattedPreviousDay(selectedDate.value ?: Calendar.getInstance().getDateFormatted())
@@ -52,7 +60,7 @@ class ViewWorkoutsViewModel(application: Application): AndroidViewModel(applicat
     }
 
     fun nextDay() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatchers.io) {
             val tmpDate = Calendar
                 .getInstance()
                 .getFormattedNextDay(selectedDate.value ?: Calendar.getInstance().getDateFormatted())
@@ -64,7 +72,7 @@ class ViewWorkoutsViewModel(application: Application): AndroidViewModel(applicat
     }
 
     fun selectedDay(date: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatchers.io) {
             selectedDate.postValue(
                 date
             )
@@ -74,10 +82,7 @@ class ViewWorkoutsViewModel(application: Application): AndroidViewModel(applicat
 
     private fun loadWorkoutsFromDb(date: String = Calendar.getInstance().getDateFormatted()) {
         workouts.postValue(
-            AppDatabase
-                .getDatabase(getApplication())
-                .workoutDao()
-                .getWorkoutsByDate(date)
+            workoutDao.getWorkoutsByDate(date)
         )
     }
 

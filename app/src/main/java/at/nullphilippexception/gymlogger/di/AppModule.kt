@@ -3,6 +3,7 @@ package at.nullphilippexception.gymlogger.di
 import android.app.Application
 import at.nullphilippexception.gymlogger.model.database.AppDatabase
 import at.nullphilippexception.gymlogger.model.database.ExerciseDao
+import at.nullphilippexception.gymlogger.model.database.WorkoutDao
 import at.nullphilippexception.gymlogger.util.CoroutineDispatchers
 import at.nullphilippexception.gymlogger.util.StandardCoroutineDispatchers
 import dagger.Module
@@ -32,5 +33,11 @@ object AppModule {
     @Singleton
     fun provideExerciseDao(app: Application): ExerciseDao {
         return AppDatabase.getDatabase(app).exerciseDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWorkoutDao(app: Application): WorkoutDao {
+        return AppDatabase.getDatabase(app).workoutDao()
     }
 }

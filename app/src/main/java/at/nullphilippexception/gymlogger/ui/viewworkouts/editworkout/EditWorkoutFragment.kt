@@ -18,11 +18,13 @@ import at.nullphilippexception.gymlogger.model.nullSafeString
 import at.nullphilippexception.gymlogger.ui.addexercise.ViewModelEvent
 import at.nullphilippexception.gymlogger.util.WorkoutDatePickerDialog
 import at.nullphilippexception.gymlogger.util.convertToCorrectFormat
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
 
 const val WORKOUT_ID = "workout_id"
 
+@AndroidEntryPoint
 class EditWorkoutFragment : Fragment() {
 
     private var workoutId: String? = null
