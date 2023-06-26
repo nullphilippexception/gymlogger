@@ -12,6 +12,7 @@ import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -60,6 +61,6 @@ class AddExerciseViewModelTest {
 
     @Test
     fun `when db returns no exercises showNoExercisesHint is true`() = runBlockingTest {
-        assertEquals(true, viewModel.viewData.value?.showNoExercisesHint)
+        assertTrue(viewModel.viewData.value?.showNoExercisesHint ?: false)
     }
 }

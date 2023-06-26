@@ -16,9 +16,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
 @HiltViewModel
-class ViewWorkoutsViewModel(
+class ViewWorkoutsViewModel @Inject constructor(
     private val workoutDao: WorkoutDao,
     private val dispatchers: CoroutineDispatchers
 ): ViewModel() {
